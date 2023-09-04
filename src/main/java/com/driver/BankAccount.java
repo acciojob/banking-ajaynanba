@@ -9,7 +9,7 @@ public class BankAccount {
     public BankAccount(String name, double balance, double minBalance) {
         this.name = name;
         this.balance = balance;
-        this.minBalance = balance;
+        this.minBalance = minBalance;
     }
 
     public String generateAccountNumber(int digits, int sum) throws Exception{
@@ -17,13 +17,38 @@ public class BankAccount {
         //Generate account number having given number of 'digits' such that the sum of digits is equal to 'sum'
         //If it is not possible, throw "Account Number can not be generated" exception
 
-        return null;
+       try {
+           String str = String.valueOf(digits);
+           int total = 0;
+           for(int i = 0;i<str.length();i++){
+               total += Integer.parseInt(String.valueOf(str.charAt(i)));
+               if(total == sum){
+                   return "Account Successfully Created.";
+               }
+           }
+           throw new Exception("Account Number can not be generated");
+       }catch (Exception e){
+           System.out.println(e);
+       }
+       return null;
     }
 
     public void deposit(double amount) {
         //add amount to balance
         this.balance += amount;
+    }
 
+
+    public void withdraw(double amount) throws Exception {
+        // Remember to throw "Insufficient Balance" exception, if the remaining amount would be less than minimum balance
+        try {
+            if(balance-amount >= minBalance){
+                this.balance -= amount;
+            }
+        }
+        catch (Exception e){
+            throw new InsufficientException("Insufficient Balan");
+        }
     }
 
     public String getName() {
@@ -49,17 +74,4 @@ public class BankAccount {
     public void setMinBalance(double minBalance) {
         this.minBalance = minBalance;
     }
-
-    public void withdraw(double amount) throws Exception {
-        // Remember to throw "Insufficient Balance" exception, if the remaining amount would be less than minimum balance
-        try {
-            if(balance-amount >= minBalance){
-                this.balance -= amount;
-            }
-        }
-        catch (Exception e){
-            throw new InsufficientException("Insufficient Balance");
-        }
-    }
-
 }
