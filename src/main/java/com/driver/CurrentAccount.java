@@ -26,6 +26,7 @@ public class CurrentAccount extends BankAccount {
             if (this.tradeLicenseId == null) {
                 throw new Exception("Valid License can not be generated");
             }
+            validateHelper(tradeLicenseId);
         } catch (Exception e) {
             System.out.println(e);
         }

@@ -47,7 +47,7 @@ public class BankAccount {
             }
         }
         catch (Exception e){
-            throw new InsufficientException("Insufficient Balan");
+            throw new InsufficientException("Insufficient Balance");
         }
     }
 
